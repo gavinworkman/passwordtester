@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Captcha Slider Demonstration</title>
+    <style>
+        body {
+            font-family: monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            background-color: #f0e6d2;
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            margin: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width:800px;
+        }
+        h1 {
+            color: #8b4513;
+        }
+        .captcha-container {
+            width: 300px;
+            height: 150px;
+            background-color: #e6d8cc;
+            position: relative;
+            overflow: hidden;
+            margin: 20px auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .puzzle-piece {
+            width: 50px;
+            height: 50px;
+            background-image: url(PuzzlePiece.png);
+            background-repeat: no-repeat;
+            background-size: contain;
+            transform: rotate(180deg);
+            position: absolute;
+            top: 50px;
+            left: 0;
+            cursor: pointer;
+            z-index:2;
+        }
+        .target-zone {
+            width: 50px;
+            height: 50px;
+            border: none;
+            position: absolute;
+            top: 49px;
+            right: 20px;
+            background-image: url(PuzzlePieceBackground.png);
+            background-size:contain;
+            transform: rotate(180deg);
+            z-index:1;
+            background-repeat: no-repeat;
+        }
+        #slider {
+            width: 100%;
+            margin: 20px 0;
+        }
+        #message {
+            margin-top: 20px;
+            font-weight: bold;
+            height: 20px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .button-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #8b4513;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #d2b48c;
+            color: white;
+            border: none;
+            border-radius: 1.5em;
+            cursor: pointer;
+            font-family: monospace;
+            font-weight: 700;
+        }
+        button:hover {
+            background-color: #c19a6b;
+        }
+        .button-link:hover {
+            background-color: #6b3100;
+        }
+        #submitButton {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #8b4513;
+            color: white;
+            border: none;
+            border-radius: 2em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-family:monospace;
+        }
+        #submitButton:hover {
+            background-color: #6b3100;
+        }
+        .quote {
+            background-color: #f5f0e8;  
+            color: #5D4037; 
+            font-style: italic;
+            margin: 1.5em 0;
+            padding: 1em 2em;
+            font-size: 1.1em;
+            line-height: 1.6;
+            box-shadow: 0 2px 4px rgba(139, 69, 19, 0.1);
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Captcha Slider Demonstration</h1>
+        <p>Slide the puzzle piece into the dashed box and click Submit to verify you're human.</p>
+        <div class="captcha-container">
+            <div class="puzzle-piece" id="puzzlePiece"></div>
+            <div class="target-zone"></div>
+        </div>
+        <input type="range" id="slider" min="0" max="250" value="0">
+        <button id="submitButton">Submit</button>
+        <div id="message"></div>
+        <div class="button-container">
+            <a href="guide.html" class="button-link">Return to Password Guide</a>
+            <a href="index.html" class="button-link">Go to Password Checker</a>
+        </div>
+        <h1 style="margin-top:2em;">What's the Difference between CAPTCHA and 2FA?</h1>
+        <p>In short, they each try to stop different threats. CAPTCHA (allegedly) stands for:
+            <blockquote class="quote">
+                 "Completely Automated Public Turing test to tell Computers and Humans Apart."
+            </blockquote>
+            CAPTCHAs are meant to deter <strong>bots</strong> from doing shady stuff on a website, as they can do a number of things much faster than any human can do with a keyboard and mouse. CAPTCHAs could be very useful on any sort of merchandise drop website. Whether for in-demand concert tickets or a new shoe, bots can snag items in bulk faster than any human. Sadly, many bots are getting advanced enough to solve CAPTCHAs on their own. However, I believe that only creates a greater need for more advanced and secure CAPTCHAs.
+
+            <p>2FA is meant to deter actual <strong>people</strong>. With 2FA, if a person gets ahold of login details, it isn't the end of the world. Not only would they need to know a username and password, which may be found in data leaks of private databases, but also the name of your childhood pet, which for most people is nowhere to be found on the internet. 2FA offers deeper security in the situation that your data has been compromised.
+
+            <h3>I hope you read it all.</h3>
+            <a href="posttest.html"><button>Take Posttest</button></a>
+    </div>
+
+    <script>
+        const slider = document.getElementById('slider');
+        const puzzlePiece = document.getElementById('puzzlePiece');
+        const message = document.getElementById('message');
+        const submitButton = document.getElementById('submitButton');
+
+        slider.addEventListener('input', function() {
+            puzzlePiece.style.left = this.value + 'px';
+            message.textContent = "";
+        });
+
+        submitButton.addEventListener('click', function() {
+            const puzzlePosition = parseInt(puzzlePiece.style.left);
+            if (puzzlePosition > 220 && puzzlePosition < 235) {
+                message.textContent = "Captcha verified! You're human!";
+                message.style.color = 'green';
+            } else {
+                message.textContent = "Verification failed. Please try again.";
+                message.style.color = 'red';
+            }
+        });
+    </script>
+</body>
+</html>
