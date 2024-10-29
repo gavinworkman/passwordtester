@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="LockImage.png" type="image/png" />
+<title>Password Strength Tester</title>
+<style>
+body {
+font-family: monospace;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+margin: 0;
+background-color: #f0e6d2;
+}
+.container {
+text-align: center;
+background-color: #fff;
+padding: 20px;
+border-radius: 8px;
+box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+h1 {
+color: #8b4513;
+margin-bottom: 20px;
+}
+input[type="password"] {
+width: 200px;
+padding: 10px;
+margin-right: 10px;
+border: none;
+border-radius: 2em;
+background-color: #f0e6d2;
+}
+button {
+padding: 10px 20px;
+background-color: #d2b48c;
+color: white;
+border: none;
+border-radius: 1.5em;
+cursor: pointer;
+font-family: monospace;
+font-weight: 700;
+}
+button:hover {
+background-color: #c19a6b;
+}
+#result {
+margin-top: 20px;
+}
+.guide-link {
+display: inline-block;
+margin-top: 20px;
+padding: 10px 20px;
+background-color: #8b4513;
+color: white;
+text-decoration: none;
+border-radius: 4px;
+transition: background-color 0.3s;
+}
+.guide-link:hover {
+background-color: #6b3100;
+}
+.pretest {
+background-color: #fff;
+position:fixed;
+top:0;
+width:100%;
+z-index:100;
+text-align: center;
+justify-content: center;
+padding: 1.5em;
+}
+#cookies{
+color: #8b4513;
+}
+
+#rf {
+all: unset;
+
+}
+
+</style>
+</head>
+<body>
+<div class="pretest">
+<h2 margin="20px" id="cookies" color="#8b4513">Pretest not taken yet!</h1>
+<a href="pretest.html">
+<button>
+Take Pretest
+</button>
+</a>
+
+<a href="scoreResults.html">
+<button>
+See Results
+</button>
+</a>
+</div>
+</div>
+<div class="container">
+<h1>Password Strength Tester</h1>
+<h3>By Gavin Workman</h3>
+<input type="password" placeholder="Passwords not saved"id="passwordInput">
+
+<button onclick="testPassword()">Test</button>
+<div id="result">
+<p>Strength: <span id="strengthValue" style="font-weight: bold;"></span></p>
+<p>Strength Rating: <span id="strengthRating" style="font-weight: bold;"></span></p>
+</div>
+<a href="guide.html" class="guide-link">How can I make my password stronger?</a>
+<a href="security.html" class ="guide-link">Other security methods</a>
+</div>
+</div>
+
+
+<script>
+function testPassword() {
+const password = document.getElementById('passwordInput').value;
+let rating = 0;
+
+// Length
+rating += password.length * 0.5;
+
+// Uppercase and lowercase balance
+const uppercaseCount = (password.match(/[A-Z]/g) || []).length;
+const lowercaseCount = (password.match(/[a-z]/g) || []).length;
+const letterDifference = Math.abs(uppercaseCount - lowercaseCount);
+rating += letterDifference === 0 ? 5 : 5 / Math.pow(letterDifference, 2);
+
+// Special characters
+const specialCharCount = (password.match(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/g) || []).length;
+rating += specialCharCount * 2;
+
+// Numbers
+const numberCount = (password.match(/[0-9]/g) || []).length;
+rating += numberCount * 0.5;
+
+// Round to nearest 0.5
+rating = Math.round(rating * 2) / 2;
+
+if (password === "" || password.length < 4) {
+rating = 0;
+}
+
+let strengthRating;
+if (rating < 4.5) {
+strengthRating = "Very Weak";
+document.getElementById("strengthRating").style.color = "darkred";
+} else if (rating < 6) {
+strengthRating = "Weak";
+document.getElementById("strengthRating").style.color = "red";
+} else if (rating < 10) {
+strengthRating = "Medium";
+document.getElementById("strengthRating").style.color = "orange";
+} else if (rating < 15) {
+strengthRating = "Strong";
+document.getElementById("strengthRating").style.color = "rgb(41, 223, 0)";
+} else {
+strengthRating = "Very Strong";
+document.getElementById("strengthRating").style.color = "rgb(0, 70, 6)";
+}
+
+document.getElementById('strengthValue').textContent = rating.toFixed(1);
+document.getElementById('strengthRating').textContent = strengthRating;
+}
+
+// Function to create a cookie for first-time site visitors
+function setCookie(name, value, days) {
+const date = new Date();
+date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+const expires = "expires=" + date.toUTCString();
+document.cookie = name + "=" + value + ";" + expires + ";path=/";
+}
+
+// Function to get a cookie by name
+function getCookie(name) {
+const nameEQ = name + "=";
+const ca = document.cookie.split(';');
+for (let i = 0; i < ca.length; i++) {
+let c = ca[i];
+while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+}
+return null;
+}
+
+// Check if the user has visited before
+const user = getCookie("visited");
+if (user) {
+document.getElementById("cookies").innerHTML="Welcome Back! If you haven't already, take the Pre-Test!";
+} else {
+document.getElementById("cookies").innerHTML="Welcome to my site for the first time!";
+setCookie("visited", "true", 365); // Set cookie for 1 year
+}
+</script>
+</body>
+</html>
