@@ -38,17 +38,19 @@
             margin: 10px 0;
         }
         .tester-link {
-            display: block;
-            width: 200px;
-            margin: 20px auto 0;
-            padding: 10px 20px;
-            background-color: #8b4513;
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: background-color 0.3s;
-            justify-content: center;
+            display: flex; /* Use flexbox for vertical and horizontal centering */
+    justify-content: center; /* Horizontally center the text */
+    align-items: center; /* Vertically center the text */
+    width: 200px;
+    margin: 20px auto 0;
+    padding: 10px 20px;
+    background-color: #8b4513;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    font-size: 18px;
         }
         .tester-link:hover {
             background-color: #6b3100;
@@ -116,7 +118,7 @@
         </p>
 
     <div style="display:flex; gap:1.5em;">
-        <a href="index.html" class="tester-link">Return to Password Tester</a>
+        <a href="index.html" class="tester-link">Home</a>
         <a href="security.html" class="tester-link">Learn about other Security Methods</a>
     </div>
     </div>
