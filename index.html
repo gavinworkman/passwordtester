@@ -186,6 +186,7 @@ if (passwords.includes(password)) {
 
 let rating = 0;
 
+
 // Length
 rating += password.length * 0.5;
 
@@ -228,6 +229,7 @@ strengthRating = "Very Strong";
 document.getElementById("strengthRating").style.color = "rgb(0, 70, 6)";
 }
 
+document.getElementById("strengthValue").style.color = document.getElementById("strengthRating").style.color
 document.getElementById('strengthValue').textContent = rating.toFixed(1);
 document.getElementById('strengthRating').textContent = strengthRating;
 }
