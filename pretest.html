@@ -125,7 +125,7 @@
                 question: "Is this email legit?",
                 options: ["Yes", "No"],
                 answer: "No",
-                img: "phishingExample.png"
+                img: "phishing-attack-email-example.png"
             }
         ];
 
@@ -174,16 +174,15 @@
             }
         }
 
-        function showResult() {
-            const container = document.getElementById("container");
-            container.innerHTML = `
-                <h1>Quiz Complete</h1>
-                <p>Your Score: <div id="score">${score}/${quizData.length}</div></p>
-                <a href="index.html"><button>Exit</button></a>
-                <iframe width="640px" height="480px" src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAO__cktyqJUNlBGMVdRNFJBVUZaN05JVFBSWVcxRUZNTi4u&embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen></iframe>`;
-        }
-
-        showQuestion();
+  
+  function showResult() {
+   
+    container.innerHTML = '<h1>Quiz Complete</h1> <p>Your Score: <div id=score></div></p> <a href="index.html"><button>Exit</button></a> <iframe width="640px" height="480px" src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAO__cktyqJUQk9NM0hNUlJYVTROTzlDRThTNzg4OUlCSi4u&embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>';
+    document.getElementById("score").innerHTML = score + "/" + quizData.length;
+  }
+  
+  showQuestion();
     </script>
+
 </body>
 </html>
