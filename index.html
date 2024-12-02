@@ -215,21 +215,26 @@ let strengthRating;
 if (rating < 4.5) {
 strengthRating = "Very Weak";
 document.getElementById("strengthRating").style.color = "darkred";
+document.getElementById("strengthValue").style.color = "darkred";
 } else if (rating < 6) {
 strengthRating = "Weak";
 document.getElementById("strengthRating").style.color = "red";
+document.getElementById("strengthValue").style.color = "red";
 } else if (rating < 10) {
 strengthRating = "Medium";
 document.getElementById("strengthRating").style.color = "orange";
+document.getElementById("strengthValue").style.color = "orange";
 } else if (rating < 15) {
 strengthRating = "Strong";
 document.getElementById("strengthRating").style.color = "rgb(41, 223, 0)";
+document.getElementById("strengthValue").style.color = "rgb(41, 223, 0)";
 } else {
 strengthRating = "Very Strong";
 document.getElementById("strengthRating").style.color = "rgb(0, 70, 6)";
+document.getElementById("strengthValue").style.color = "rgb(0, 70, 6)";
 }
 
-document.getElementById("strengthValue").style.color = document.getElementById("strengthRating").style.color
+
 document.getElementById('strengthValue').textContent = rating.toFixed(1);
 document.getElementById('strengthRating').textContent = strengthRating;
 }
