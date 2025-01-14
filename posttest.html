@@ -83,7 +83,7 @@
 </head>
 <body>
     <div id="container">
-        <h1>Pretest</h1>
+        <h1>PostTest</h1>
         <div>
             <p id="question"></p>
             <img id="questionImage" src="" alt="Question Image" style="display:none; max-width: 100%; height: auto;">
@@ -104,17 +104,17 @@
             },
             {
                 question: "Should you put personal information like a birthyear in a password?",
-                options: ["yes", "no"],
+                options: ["yes", "no", "doesn't really matter"],
                 answer: "no"
             },
             {
-                question: "Are password managers helpful in creating and storing more complex passwords?",
-                options: ["yes", "no"],
-                answer: "yes"
+                question: "Should you trust password managers to create and store more complex passwords?",
+                options: ["yes", "no", "too complicated", "yes, but check for validity first"],
+                answer: "yes, but check for validity first"
             },
             {
                 question: "Who is 2 Factor Authentication meant to deter?",
-                options: ["Botnet attacks", "Friends trying to use your login", "Human attackers", "You trying to login in a hurry"],
+                options: ["Friends trying to use your login", "Human attackers", "You trying to login in a hurry"],
                 answer: "Human attackers"
             },
             {
@@ -123,10 +123,20 @@
                 answer: "HTTPS"
             },
             {
+                question: "What are cookies?",
+                options: ["Soft-Baked Deliciousness","Information websites keep from you","Malicious code"],
+                answer: "Information websites keep from you"
+            },
+            {
                 question: "Is this email legit?",
                 options: ["Yes", "No"],
                 answer: "No",
-                img: "phishing-attack-email-example.png"
+                img: "phishingExample.png"
+            },
+            {
+                question: "What's the worst password out of the following?",
+                options: ["R3dR0b!n#YUM", "Ke11@mD0wn!", "password"],
+                answer: "password"
             }
         ];
 
